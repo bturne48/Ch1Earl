@@ -1,0 +1,11 @@
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - samtools =1.17
+  - bcftools =1.17
+  - vcftools =0.1.16
+  - tabix =1.11
+  - py-bgzip =0.4.0
+  - seqtk

@@ -1,0 +1,25 @@
+default-resources:
+  - cluster=sbatch
+  - slurm_partition='Pegasus,Orion,Nebula'  
+  - runtime=2880
+  - nodes=1
+  - jobs=1
+  - tasks=1
+  - cpus_per_task=1
+  - mem_mb_per_cpu=7999
+  - tmpdir='/scratch/rogers_temp/bt_temp/'
+  - mem_mb=None
+  - disk_mb=None
+  - slurm_extra="--exclude=str-abm3"
+#--mail-type=END --mail-user=bturne48@uncc.edu'
+  
+# set-resources: map rule names to resources in general
+set-resources:
+  - star_index:cpus_per_task=4
+  - star_align:cpus_per_task=16
+  - rsem_expression:cpus_per_task=16
+  - runRModel:cpus_per_task=32
+  - runRModel:mem_mb_per_cpu=15999
+  - bam2fasta_no_interleave:cpus_per_task=4
+  - earl_grey:mem_mb_per_cpu=31999
+  - earl_grey:cpus_per_task=8

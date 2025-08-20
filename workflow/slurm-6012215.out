@@ -1,0 +1,35 @@
+======================================================
+Start Time  : Wed Aug 20 11:51:31 AM EDT 2025
+Submit Dir  : /projects/rogers_research/fnb/Brandon/RemoteEdit/ComplexVarAlign/Ch1Earl/workflow
+Job ID/gName : 6012215 / DupProj
+Num Tasks   : 1 total [1 nodes @ 1 CPUs/node]
+=====================hj=================================
+
+Hello World! I ran on compute node str-abm3
+Using profile envs/ for setting default command line arguments.
+Building DAG of jobs...
+Your conda installation is not configured to use strict channel priorities. This is however crucial for having robust and correct environments (for details, see https://conda-forge.org/docs/user/tipsandtricks.html). Please consider to configure strict priorities by executing 'conda config --set channel_priority strict'.
+Using shell: /usr/bin/bash
+Provided cores: 1 (use --cores to define parallelism)
+Rules claiming more threads will be scaled down.
+Job stats:
+job          count
+---------  -------
+all              1
+earl_grey        1
+total            2
+
+Select jobs to execute...
+
+[Wed Aug 20 11:51:34 2025]
+rule earl_grey:
+    input: /scratch/bturne48/MayotteData/Dyak_Tai18E2_2.1/ncbi_dataset/data/GCF_016746365.2/GCF_016746365.2_Prin_Dyak_Tai18E2_2.1_genomic.fna
+    output: results/1_fastaProcess/EarlGrey
+    jobid: 1
+    reason: Missing output files: results/1_fastaProcess/EarlGrey
+    resources: tmpdir=<TBD>, cluster=sbatch, slurm_partition=Pegasus,Orion,Nebula, runtime=2880, nodes=1, jobs=1, tasks=1, cpus_per_task=8, mem_mb_per_cpu=31999, slurm_extra=--exclude=str-abm3
+
+earlGrey -g /scratch/bturne48/MayotteData/Dyak_Tai18E2_2.1/ncbi_dataset/data/GCF_016746365.2/GCF_016746365.2_Prin_Dyak_Tai18E2_2.1_genomic.fna -s Dyak_Tai18E2 -o results/1_fastaProcess/EarlGrey -t 8
+No SLURM account given, trying to guess.
+Guessed SLURM account: staruser
+Job 1 has been submitted with SLURM jobid 6012216 (log: .snakemake/slurm_logs/rule_earl_grey/6012216.log).

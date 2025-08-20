@@ -1,0 +1,1203 @@
+#********* NOTE: throughout this file, keys cannot contain a period (".") *******########
+#********* NOTE: throughout this file, keys cannot contain a period (".") *******########
+#********* NOTE: throughout this file, keys cannot contain a period (".") *******########
+
+
+# some rules need temp locations to write files
+tempDir: /scratch/bturne48/tmp
+
+
+#names and filepaths for reference fasta file(s)
+refs:
+  Dyak_Tai18E2: /scratch/bturne48/MayotteData/Dyak_Tai18E2_2.1/ncbi_dataset/data/GCF_016746365.2/GCF_016746365.2_Prin_Dyak_Tai18E2_2.1_genomic.fna
+  # reference genome that will be used to polarize ancestral state
+  anscRef: /projects/rogers_research/fnb/RefGenomes/Dtei_GT53w.fasta
+
+
+#number of read pairs necessary to support a mutation call (greater than or equal to 3)
+#readsupport[:] 4
+readsupport: 3
+
+#names and filepaths for paired-end sequencing fastq files
+fastqs:
+    # GT53w:
+    #   1: /projects/rogers_research/fnb/RefGenomes/GT53w_1.fastq
+    #   2: /projects/rogers_research/fnb/RefGenomes/GT53w_2.fastq
+    01_S19:
+      1: /projects/rogers_research/AmirData/05_RLR_01_S19_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_01_S19_L004_R2_001.fastq.gz
+    02_S20:
+      1: /projects/rogers_research/AmirData/05_RLR_02_S20_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_02_S20_L004_R2_001.fastq.gz
+    03_S21:
+      1: /projects/rogers_research/AmirData/05_RLR_03_S21_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_03_S21_L004_R2_001.fastq.gz
+    04_S22:
+      1: /projects/rogers_research/AmirData/05_RLR_04_S22_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_04_S22_L004_R2_001.fastq.gz
+    05_S23:
+      1: /projects/rogers_research/AmirData/05_RLR_05_S23_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_05_S23_L004_R2_001.fastq.gz
+    06_S24:
+      1: /projects/rogers_research/AmirData/05_RLR_06_S24_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_06_S24_L004_R2_001.fastq.gz
+    07_S25:
+      1: /projects/rogers_research/AmirData/05_RLR_07_S25_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_07_S25_L004_R2_001.fastq.gz
+    # 08_S26:
+    #   1: /projects/rogers_research/AmirData/05_RLR_08_S26_L004_R1_001.fastq.gz
+    #   2: /projects/rogers_research/AmirData/05_RLR_08_S26_L004_R2_001.fastq.gz
+    09_S27:
+      1: /projects/rogers_research/AmirData/05_RLR_09_S27_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_09_S27_L004_R2_001.fastq.gz
+    10_S28:
+      1: /projects/rogers_research/AmirData/05_RLR_10_S28_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_10_S28_L004_R2_001.fastq.gz
+    11_S29:
+      1: /projects/rogers_research/AmirData/05_RLR_11_S29_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_11_S29_L004_R2_001.fastq.gz
+    12_S30:
+      1: /projects/rogers_research/AmirData/05_RLR_12_S30_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_12_S30_L004_R2_001.fastq.gz
+    13_S31:
+      1: /projects/rogers_research/AmirData/05_RLR_13_S31_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_13_S31_L004_R2_001.fastq.gz
+    14_S32:
+      1: /projects/rogers_research/AmirData/05_RLR_14_S32_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_14_S32_L004_R2_001.fastq.gz
+    15_S33:
+      1: /projects/rogers_research/AmirData/05_RLR_15_S33_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_15_S33_L004_R2_001.fastq.gz
+    16_S34:
+      1: /projects/rogers_research/AmirData/05_RLR_16_S34_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_16_S34_L004_R2_001.fastq.gz
+    17_S35:
+      1: /projects/rogers_research/AmirData/05_RLR_17_S35_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_17_S35_L004_R2_001.fastq.gz
+    18_S36:
+     1: /projects/rogers_research/AmirData/05_RLR_18_S36_L004_R1_001.fastq.gz
+     2: /projects/rogers_research/AmirData/05_RLR_18_S36_L004_R2_001.fastq.gz
+    19_S37:
+      1: /projects/rogers_research/AmirData/05_RLR_19_S37_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_19_S37_L004_R2_001.fastq.gz
+    CY01A_02_19_2010_54:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY01A_02_19_2010_54_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY01A_02_19_2010_54_2.fastq.gz
+    CY01A_03_01_2010_75:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY01A_03_01_2010_75_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY01A_03_01_2010_75_2.fastq.gz
+    CY01A_04_06_2011_75:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY01A_04_06_2011_75_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY01A_04_06_2011_75_2.fastq.gz
+    CY02B5_02_05_2010_48:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY02B5_02_05_2010_48_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY02B5_02_05_2010_48_2.fastq.gz
+    CY02B5_02_19_2010_54:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY02B5_02_19_2010_54_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY02B5_02_19_2010_54_2.fastq.gz
+    CY02B5_03_01_2010_75:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY02B5_03_01_2010_75_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY02B5_03_01_2010_75_2.fastq.gz
+    CY04B_02_05_2010_48:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY04B_02_05_2010_48_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY04B_02_05_2010_48_2.fastq.gz
+    CY04B_02_19_2010_54:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY04B_02_19_2010_54_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY04B_02_19_2010_54_2.fastq.gz
+    # CY04B_03_01_2010_75:
+    #   1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY04B_03_01_2010_75_1.fastq.gz
+    #   2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY04B_03_01_2010_75_2.fastq.gz
+    # CY04B_04_06_2011_75:
+    #   1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY04B_04_06_2011_75_1.fastq.gz
+    #   2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY04B_04_06_2011_75_2.fastq.gz
+    CY08A_02_05_2010_48:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY08A_02_05_2010_48_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY08A_02_05_2010_48_2.fastq.gz
+    CY08A_03_01_2010_75:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY08A_03_01_2010_75_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY08A_03_01_2010_75_2.fastq.gz
+    CY08A_03_15_2010_54:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY08A_03_15_2010_54_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY08A_03_15_2010_54_2.fastq.gz
+    CY13A_02_05_2010_48:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY13A_02_05_2010_48_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY13A_02_05_2010_48_2.fastq.gz
+    CY13A_03_01_2010_75:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY13A_03_01_2010_75_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY13A_03_01_2010_75_2.fastq.gz
+    CY13A_03_15_2010_54:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY13A_03_15_2010_54_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY13A_03_15_2010_54_2.fastq.gz
+    CY17C_02_05_2010_48:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY17C_02_05_2010_48_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY17C_02_05_2010_48_2.fastq.gz
+    CY17C_03_01_2010_75:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY17C_03_01_2010_75_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY17C_03_01_2010_75_2.fastq.gz
+    CY17C_03_15_2010_54:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY17C_03_15_2010_54_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY17C_03_15_2010_54_2.fastq.gz
+    CY20A_04_06_2011_75:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY20A_04_06_2011_75_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY20A_04_06_2011_75_2.fastq.gz
+    CY20A_09_07_2010_75:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY20A_09_07_2010_75_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY20A_09_07_2010_75_2.fastq.gz
+    CY20A2_09_12_2010_75:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY20A2_09_12_2010_75_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY20A2_09_12_2010_75_2.fastq.gz
+    CY21B3_02_05_2010_48:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY21B3_02_05_2010_48_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY21B3_02_05_2010_48_2.fastq.gz
+    CY21B3_03_01_2010_75:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY21B3_03_01_2010_75_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY21B3_03_01_2010_75_2.fastq.gz
+    CY21B3_03_15_2010_54:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY21B3_03_15_2010_54_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY21B3_03_15_2010_54_2.fastq.gz
+    CY22B_02_19_2010_54:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY22B_02_19_2010_54_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY22B_02_19_2010_54_2.fastq.gz
+    CY22B_03_01_2010_75:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY22B_03_01_2010_75_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY22B_03_01_2010_75_2.fastq.gz
+    CY22B_03_15_2010_54:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY22B_03_15_2010_54_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY22B_03_15_2010_54_2.fastq.gz
+    CY28A4_06_21_2010_54:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY28A4_06_21_2010_54_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY28A4_06_21_2010_54_2.fastq.gz
+    CY28A4_09_07_2010_75:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY28A4_09_07_2010_75_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY28A4_09_07_2010_75_2.fastq.gz
+    CY28A4_09_12_2010_75:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/CY28A4_09_12_2010_75_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/CY28A4_09_12_2010_75_2.fastq.gz
+    NY141_04_06_2011_75:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY141_04_06_2011_75_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY141_04_06_2011_75_2.fastq.gz
+    NY141_06_21_2010_54:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY141_06_21_2010_54_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY141_06_21_2010_54_2.fastq.gz
+    NY141_09_12_2010_75:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY141_09_12_2010_75_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY141_09_12_2010_75_2.fastq.gz
+    NY42_06_21_2010_54:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY42_06_21_2010_54_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY42_06_21_2010_54_2.fastq.gz
+    NY42_09_07_2010_75:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY42_09_07_2010_75_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY42_09_07_2010_75_2.fastq.gz
+    NY42_09_12_2010_75:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY42_09_12_2010_75_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY42_09_12_2010_75_2.fastq.gz
+    NY48_05_13_2010_54:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY48_05_13_2010_54_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY48_05_13_2010_54_2.fastq.gz
+    NY48_06_13_2010_72:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY48_06_13_2010_72_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY48_06_13_2010_72_2.fastq.gz
+    NY48_07_11_2010_75:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY48_07_11_2010_75_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY48_07_11_2010_75_2.fastq.gz
+    NY56_05_13_2010_54:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY56_05_13_2010_54_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY56_05_13_2010_54_2.fastq.gz
+    NY56_06_13_2010_72:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY56_06_13_2010_72_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY56_06_13_2010_72_2.fastq.gz
+    NY56_07_11_2010_75:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY56_07_11_2010_75_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY56_07_11_2010_75_2.fastq.gz
+    # NY62_06_01_2010_54:
+    #   1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY62_06_01_2010_54_1.fastq.gz
+    #   2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY62_06_01_2010_54_2.fastq.gz
+    # NY62_06_13_2010_72:
+    #   1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY62_06_13_2010_72_1.fastq.gz
+    #   2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY62_06_13_2010_72_2.fastq.gz
+    # NY62_07_11_2010_75:
+    #   1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY62_07_11_2010_75_1.fastq.gz
+    #   2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY62_07_11_2010_75_2.fastq.gz
+    NY65_06_01_2010_54:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY65_06_01_2010_54_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY65_06_01_2010_54_2.fastq.gz
+    # NY65_07_11_2010_75:
+    #   1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY65_07_11_2010_75_1.fastq.gz
+    #   2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY65_07_11_2010_75_2.fastq.gz
+    NY66_05_13_2010_54:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY66_05_13_2010_54_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY66_05_13_2010_54_2.fastq.gz
+    NY66_07_11_2010_75:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY66_07_11_2010_75_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY66_07_11_2010_75_2.fastq.gz
+    NY66-2_04_06_2011_75:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY66-2_04_06_2011_75_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY66-2_04_06_2011_75_2.fastq.gz
+    # NY73_06_01_2010_54:
+    #   1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY73_06_01_2010_54_1.fastq.gz
+    #   2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY73_06_01_2010_54_2.fastq.gz
+    # NY73_06_13_2010_72:
+    #   1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY73_06_13_2010_72_1.fastq.gz
+    #   2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY73_06_13_2010_72_2.fastq.gz
+    # NY73_07_11_2010_75:
+    #   1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY73_07_11_2010_75_1.fastq.gz
+    #   2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY73_07_11_2010_75_2.fastq.gz
+    NY81_04_06_2011_75:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY81_04_06_2011_75_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY81_04_06_2011_75_2.fastq.gz
+    NY81_05_13_2010_54:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY81_05_13_2010_54_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY81_05_13_2010_54_2.fastq.gz
+    NY81_07_11_2010_75:
+      1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY81_07_11_2010_75_1.fastq.gz
+      2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY81_07_11_2010_75_2.fastq.gz
+    # NY85_06_21_2010_54:
+    #   1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY85_06_21_2010_54_1.fastq.gz
+    #   2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY85_06_21_2010_54_2.fastq.gz
+    # NY85_09_07_2010_75:
+    #   1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY85_09_07_2010_75_1.fastq.gz
+    #   2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY85_09_07_2010_75_2.fastq.gz
+    # NY85_09_12_2010_75:
+    #   1: /projects/rogers_research/fnb/DyakmainlandSequnces/NY85_09_12_2010_75_1.fastq.gz
+    #   2: /projects/rogers_research/fnb/DyakmainlandSequnces/NY85_09_12_2010_75_2.fastq.gz
+    grey_Bata6_S20_L005:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/grey_Bata6_S20_L005_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/grey_Bata6_S20_L005_R2_001.fastq.gz
+    grey_cameroon_115_S9_L005:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/grey_cameroon_115_S9_L005_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/grey_cameroon_115_S9_L005_R2_001.fastq.gz
+    Grey_Tai_12_S64_L007:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Grey_Tai_12_S64_L007_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Grey_Tai_12_S64_L007_R2_001.fastq.gz
+    grey_tai_18_S22_L005:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/grey_tai_18_S22_L005_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/grey_tai_18_S22_L005_R2_001.fastq.gz
+    grey_tai_6_S1_L005:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/grey_tai_6_S1_L005_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/grey_tai_6_S1_L005_R2_001.fastq.gz
+    oran_11_4_1_S13_L005:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_11_4_1_S13_L005_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_11_4_1_S13_L005_R2_001.fastq.gz
+    oran_11150_85_S82_L008:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_11150_85_S82_L008_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_11150_85_S82_L008_R2_001.fastq.gz
+    oran_11_5_S7_L005:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_11_5_S7_L005_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_11_5_S7_L005_R2_001.fastq.gz
+    oran_13_2_1_S21_L005:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_13_2_1_S21_L005_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_13_2_1_S21_L005_R2_001.fastq.gz
+    oran_13_3_1_S89_L008:  
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_13_3_1_S89_L008_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_13_3_1_S89_L008_R2_001.fastq.gz
+    oran_13_6_S8_L005:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_13_6_S8_L005_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_13_6_S8_L005_R2_001.fastq.gz
+    oran_13_7_S84_L008:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_13_7_S84_L008_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_13_7_S84_L008_R2_001.fastq.gz
+    oran_13_8_S15_L005:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_13_8_S15_L005_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_13_8_S15_L005_R2_001.fastq.gz
+    oran_14_3_1_S90_L008:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_14_3_1_S90_L008_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_14_3_1_S90_L008_R2_001.fastq.gz
+    oran14_3_S19_L005:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran14_3_S19_L005_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran14_3_S19_L005_R2_001.fastq.gz
+    oran_14_5_S93_L008:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_14_5_S93_L008_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_14_5_S93_L008_R2_001.fastq.gz
+    oran_14_6_S12_L005:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_14_6_S12_L005_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_14_6_S12_L005_R2_001.fastq.gz
+    oran_17_1_S81_L008:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_17_1_S81_L008_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_17_1_S81_L008_R2_001.fastq.gz
+    oran_17_2_1_S10_L005:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_17_2_1_S10_L005_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_17_2_1_S10_L005_R2_001.fastq.gz
+    oran_17_26_1_S72_L008:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_17_26_1_S72_L008_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_17_26_1_S72_L008_R2_001.fastq.gz
+    oran_17_26_S85_L008:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_17_26_S85_L008_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_17_26_S85_L008_R2_001.fastq.gz
+    oran_17_7_S80_L008:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_17_7_S80_L008_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_17_7_S80_L008_R2_001.fastq.gz
+    oran_19_6_1_S6_L005:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_19_6_1_S6_L005_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_19_6_1_S6_L005_R2_001.fastq.gz
+    oran_9_7_16_S76_L008:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_9_7_16_S76_L008_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_9_7_16_S76_L008_R2_001.fastq.gz
+    oran_cas_33_S87_L008:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_cas_33_S87_L008_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_cas_33_S87_L008_R2_001.fastq.gz
+    oran_cascade_19_16_S91_L008:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_cascade_19_16_S91_L008_R1_001.fastq.gz  
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_cascade_19_16_S91_L008_R2_001.fastq.gz
+    oran_cascade_21_S88_L008:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_cascade_21_S88_L008_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_cascade_21_S88_L008_R2_001.fastq.gz
+    oran_cascade_24_S77_L008:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_cascade_24_S77_L008_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_cascade_24_S77_L008_R2_001.fastq.gz
+    cascade_4_1_1_S83_L008:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/cascade_4_1_1_S83_L008_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/cascade_4_1_1_S83_L008_R2_001.fastq.gz
+    oran_LP_4_6_2_S95_L008:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_LP_4_6_2_S95_L008_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_LP_4_6_2_S95_L008_R2_001.fastq.gz
+    oranLP72_4_S11_L005:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oranLP72_4_S11_L005_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oranLP72_4_S11_L005_R2_001.fastq.gz
+    oran_market_7_6_S75_L008:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_market_7_6_S75_L008_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_market_7_6_S75_L008_R2_001.fastq.gz
+    oran_SJ1_S79_L008:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_SJ1_S79_L008_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_SJ1_S79_L008_R2_001.fastq.gz
+    oran_sj_28_S73_L008: 
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_sj_28_S73_L008_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_sj_28_S73_L008_R2_001.fastq.gz
+    oran_sj_3_4_6_S86_L008:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_sj_3_4_6_S86_L008_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_sj_3_4_6_S86_L008_R2_001.fastq.gz
+    oran_SJ7_S78_L008:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_SJ7_S78_L008_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_SJ7_S78_L008_R2_001.fastq.gz
+    oran_SJ9_S92_L008:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_SJ9_S92_L008_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_SJ9_S92_L008_R2_001.fastq.gz
+    oran_sn6_1_S74_L008:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_sn6_1_S74_L008_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_sn6_1_S74_L008_R2_001.fastq.gz
+    oran_ST1_1_6_S14_L005:  
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_ST1_1_6_S14_L005_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_ST1_1_6_S14_L005_R2_001.fastq.gz
+    oran_ST672_1_4_S23_L005: 
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_ST672_1_4_S23_L005_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/oran_ST672_1_4_S23_L005_R2_001.fastq.gz
+    080_1240_1_S55_L007: 
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/080_1240_1_S55_L007_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/080_1240_1_S55_L007_R2_001.fastq.gz
+    8517_S53_L007:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/8517_S53_L007_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/8517_S53_L007_R2_001.fastq.gz
+    A_1200_4_S31_L006:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/A_1200_4_S31_L006_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/A_1200_4_S31_L006_R2_001.fastq.gz     
+    Amelia_2015_18_S46_L006:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Amelia_2015_18_S46_L006_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Amelia_2015_18_S46_L006_R2_001.fastq.gz   
+    Amelia_2015_1_S52_L007:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Amelia_2015_1_S52_L007_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Amelia_2015_1_S52_L007_R2_001.fastq.gz    
+    B1300_-13_S33_L006:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/B1300_-13_S33_L006_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/B1300_-13_S33_L006_R2_001.fastq.gz   
+    B1300_5_S29_L006:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/B1300_5_S29_L006_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/B1300_5_S29_L006_R2_001.fastq.gz   
+    BS_14_6_S30_L006:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/BS_14_6_S30_L006_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/BS_14_6_S30_L006_R2_001.fastq.gz   
+    BS14_S43_L006:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/BS14_S43_L006_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/BS14_S43_L006_R2_001.fastq.gz 
+    C_1350_16_S32_L006:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/C_1350_16_S32_L006_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/C_1350_16_S32_L006_R2_001.fastq.gz  
+    C1350_18_S44_L006:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/C1350_18_S44_L006_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/C1350_18_S44_L006_R2_001.fastq.gz 
+    CA60_1482_1_S36_L006:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/CA60_1482_1_S36_L006_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/CA60_1482_1_S36_L006_R2_001.fastq.gz 
+    CA60_1482_2_S50_L007:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/CA60_1482_2_S50_L007_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/CA60_1482_2_S50_L007_R2_001.fastq.gz  
+    CAR_1366_9_S45_L006:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/CAR_1366_9_S45_L006_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/CAR_1366_9_S45_L006_R2_001.fastq.gz 
+    CAR_1490_16_S34_L006:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/CAR_1490_16_S34_L006_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/CAR_1490_16_S34_L006_R2_001.fastq.gz   
+    CAR_1490_3_S39_L006:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/CAR_1490_3_S39_L006_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/CAR_1490_3_S39_L006_R2_001.fastq.gz  
+    CAR_1490_5_S61_L007:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/CAR_1490_5_S61_L007_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/CAR_1490_5_S61_L007_R2_001.fastq.gz
+    car_1490_6_S5_L005:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/car_1490_6_S5_L005_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/car_1490_6_S5_L005_R2_001.fastq.gz
+    CAR_1496_17_S51_L007:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/CAR_1496_17_S51_L007_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/CAR_1496_17_S51_L007_R2_001.fastq.gz  
+    CAR_1566_94_S59_L007:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/CAR_1566_94_S59_L007_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/CAR_1566_94_S59_L007_R2_001.fastq.gz   
+    Car_1600_S38_L006:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Car_1600_S38_L006_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Car_1600_S38_L006_R2_001.fastq.gz
+    CARV_2015_2_S42_L006:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/CARV_2015_2_S42_L006_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/CARV_2015_2_S42_L006_R2_001.fastq.gz   
+    cascade_4_1_1_S83_L008:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/cascade_4_1_1_S83_L008_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/cascade_4_1_1_S83_L008_R2_001.fastq.gz
+    COST_1250_5_S47_L006:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/COST_1250_5_S47_L006_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/COST_1250_5_S47_L006_R2_001.fastq.gz    
+    Cost_1270_6_S27_L006:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Cost_1270_6_S27_L006_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Cost_1270_6_S27_L006_R2_001.fastq.gz    
+    Field_3_1_S37_L006:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Field_3_1_S37_L006_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Field_3_1_S37_L006_R2_001.fastq.gz    
+    Field_3A_S24_L006:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Field_3A_S24_L006_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Field_3A_S24_L006_R2_001.fastq.gz 
+    Field_3_S40_L006:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Field_3_S40_L006_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Field_3_S40_L006_R2_001.fastq.gz    
+    Line_1_S35_L006:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Line_1_S35_L006_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Line_1_S35_L006_R2_001.fastq.gz   
+    Line_42_S28_L006:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Line_42_S28_L006_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Line_42_S28_L006_R2_001.fastq.gz  
+    OBAT_1200_3_S63_L007:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/OBAT_1200_3_S63_L007_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/OBAT_1200_3_S63_L007_R2_001.fastq.gz  
+    obat_1250_31_S57_L007:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/obat_1250_31_S57_L007_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/obat_1250_31_S57_L007_R2_001.fastq.gz   
+    OBAT_1400_2_S41_L006:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/OBAT_1400_2_S41_L006_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/OBAT_1400_2_S41_L006_R2_001.fastq.gz   
+    OBO_1250_6_S4_L005:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/OBO_1250_6_S4_L005_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/OBO_1250_6_S4_L005_R2_001.fastq.gz    
+    quijai_650_39_S56_L007:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/quijai_650_39_S56_L007_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/quijai_650_39_S56_L007_R2_001.fastq.gz
+    STO17_S3_L005:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/STO17_S3_L005_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/STO17_S3_L005_R2_001.fastq.gz
+    STO_17_S60_L007:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/STO_17_S60_L007_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/STO_17_S60_L007_R2_001.fastq.gz
+    STO_4_S48_L007:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/STO_4_S48_L007_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/STO_4_S48_L007_R2_001.fastq.gz   
+    STO7_S49_L007:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/STO7_S49_L007_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/STO7_S49_L007_R2_001.fastq.gz  
+    Syn_2005_S25_L006:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Syn_2005_S25_L006_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Syn_2005_S25_L006_R2_001.fastq.gz    
+    thera_2005_S58_L007:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/thera_2005_S58_L007_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/thera_2005_S58_L007_R2_001.fastq.gz    
+    thera_3_S54_L007:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/thera_3_S54_L007_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/thera_3_S54_L007_R2_001.fastq.gz    
+    thera_4_S62_L007:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/thera_4_S62_L007_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/thera_4_S62_L007_R2_001.fastq.gz  
+    Thera_6_S26_L006:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Thera_6_S26_L006_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Thera_6_S26_L006_R2_001.fastq.gz  
+    Xute_1_S2_L005:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Xute_1_S2_L005_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Xute_1_S2_L005_R2_001.fastq.gz
+    01_S19:
+      1: /projects/rogers_research/AmirData/05_RLR_01_S19_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_01_S19_L004_R2_001.fastq.gz
+    02_S20:
+      1: /projects/rogers_research/AmirData/05_RLR_02_S20_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_02_S20_L004_R2_001.fastq.gz
+    03_S21:
+      1: /projects/rogers_research/AmirData/05_RLR_03_S21_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_03_S21_L004_R2_001.fastq.gz
+    04_S22:
+      1: /projects/rogers_research/AmirData/05_RLR_04_S22_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_04_S22_L004_R2_001.fastq.gz
+    05_S23:
+      1: /projects/rogers_research/AmirData/05_RLR_05_S23_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_05_S23_L004_R2_001.fastq.gz
+    06_S24:
+      1: /projects/rogers_research/AmirData/05_RLR_06_S24_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_06_S24_L004_R2_001.fastq.gz
+    07_S25:
+      1: /projects/rogers_research/AmirData/05_RLR_07_S25_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_07_S25_L004_R2_001.fastq.gz
+    # 08_S26:
+    #   1: /projects/rogers_research/AmirData/05_RLR_08_S26_L004_R1_001.fastq.gz
+    #   2: /projects/rogers_research/AmirData/05_RLR_08_S26_L004_R2_001.fastq.gz
+    09_S27:
+      1: /projects/rogers_research/AmirData/05_RLR_09_S27_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_09_S27_L004_R2_001.fastq.gz
+    10_S28:
+      1: /projects/rogers_research/AmirData/05_RLR_10_S28_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_10_S28_L004_R2_001.fastq.gz
+    11_S29:
+      1: /projects/rogers_research/AmirData/05_RLR_11_S29_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_11_S29_L004_R2_001.fastq.gz
+    12_S30:
+      1: /projects/rogers_research/AmirData/05_RLR_12_S30_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_12_S30_L004_R2_001.fastq.gz
+    13_S31:
+      1: /projects/rogers_research/AmirData/05_RLR_13_S31_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_13_S31_L004_R2_001.fastq.gz
+    14_S32:
+      1: /projects/rogers_research/AmirData/05_RLR_14_S32_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_14_S32_L004_R2_001.fastq.gz
+    15_S33:
+      1: /projects/rogers_research/AmirData/05_RLR_15_S33_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_15_S33_L004_R2_001.fastq.gz
+    16_S34:
+      1: /projects/rogers_research/AmirData/05_RLR_16_S34_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_16_S34_L004_R2_001.fastq.gz
+    17_S35:
+      1: /projects/rogers_research/AmirData/05_RLR_17_S35_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_17_S35_L004_R2_001.fastq.gz
+    18_S36:
+     1: /projects/rogers_research/AmirData/05_RLR_18_S36_L004_R1_001.fastq.gz
+     2: /projects/rogers_research/AmirData/05_RLR_18_S36_L004_R2_001.fastq.gz
+    19_S37:
+      1: /projects/rogers_research/AmirData/05_RLR_19_S37_L004_R1_001.fastq.gz
+      2: /projects/rogers_research/AmirData/05_RLR_19_S37_L004_R2_001.fastq.gz
+    #green
+    1_7__1_S67:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Green_1_7__1_S67_L007_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Green_1_7__1_S67_L007_R2_001.fastq.gz
+    2_8_S66:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Green_2_8_S66_L007_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Green_2_8_S66_L007_R2_001.fastq.gz
+    3_8_S70:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Green_3_8_S70_L007_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Green_3_8_S70_L007_R2_001.fastq.gz
+    4_23_1_S71:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Green_4_23_1_S71_L007_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Green_4_23_1_S71_L007_R2_001.fastq.gz
+    5_3_S65:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Green_5_3_S65_L007_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Green_5_3_S65_L007_R2_001.fastq.gz
+    7_14_6_S69:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Green_7_14_6_S69_L007_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Green_7_14_6_S69_L007_R2_001.fastq.gz
+    SA3_S68:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Green_SA3_S68_L007_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/Green_SA3_S68_L007_R2_001.fastq.gz
+    3_4_1_S16:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/green_3_4_1_S16_L005_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/green_3_4_1_S16_L005_R2_001.fastq.gz
+    5_19_6_S18:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/green_5_19_6_S18_L005_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/green_5_19_6_S18_L005_R2_001.fastq.gz
+    Bosa_32_6_S17:
+      1: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/green_Bosa_32_6_S17_L005_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/DsantSequences/ROGERS_4620_180202A1/green_Bosa_32_6_S17_L005_R2_001.fastq.gz
+
+
+
+
+
+RNAfastq:
+  Amelia_2015_1:
+    Ovaries:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Amelia_F_ovaries_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Amelia_F_ovaries_R2_001.fastq.gz
+    F_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Amelia_F_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Amelia_F_soma_R2_001.fastq.gz
+    M_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Amelia_M_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Amelia_M_soma_R2_001.fastq.gz
+    M_testes:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Amelia_M_testes_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Amelia_M_testes_R2_001.fastq.gz
+
+  B1300_5:
+    Ovaries:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/B1300_F_ovaries_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/B1300_F_ovaries_R2_001.fastq.gz
+    F_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/B1300_F_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/B1300_F_soma_R2_001.fastq.gz
+    M_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/B1300_M_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/B1300_M_soma_R2_001.fastq.gz
+    M_testes:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/B1300_M_testes_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/B1300_M_testes_R2_001.fastq.gz
+
+  C1350_16:
+    Ovaries:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/C1350_F_ovaries_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/C1350_F_ovaries_R2_001.fastq.gz
+    F_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/C1350_F_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/C1350_F_soma_R2_001.fastq.gz
+    M_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/C1350_M_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/C1350_M_soma_R2_001.fastq.gz
+    M_testes:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/C1350_M_testes_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/C1350_M_testes_R2_001.fastq.gz
+
+  CARV_2015_2:
+    Ovaries:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/CARV_F_ovaries_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/CARV_F_ovaries_R2_001.fastq.gz
+    F_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/CARV_F_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/CARV_F_soma_R2_001.fastq.gz
+    M_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/CARV_M_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/CARV_M_soma_R2_001.fastq.gz
+    M_testes:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/CARV_M_testes_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/CARV_M_testes_R2_001.fastq.gz  
+
+  Field_3:
+    Ovaries:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Field3_F_ovaries_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Field3_F_ovaries_R2_001.fastq.gz
+    F_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Field3_F_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Field3_F_soma_R2_001.fastq.gz
+    M_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Field3_M_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Field3_M_soma_R2_001.fastq.gz
+    M_testes:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Field3_M_testes_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Field3_M_testes_R2_001.fastq.gz 
+
+  OBAT_1200_3:
+    Ovaries:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/OBAT_F_ovaries_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/OBAT_F_ovaries_R2_001.fastq.gz
+    F_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/OBAT_F_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/OBAT_F_soma_R2_001.fastq.gz
+    M_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/OBAT_M_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/OBAT_M_soma_R2_001.fastq.gz
+    M_testes:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/OBAT_M_testes_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/OBAT_M_testes_R2_001.fastq.gz 
+
+  oran_sn6_1:
+    Ovaries:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/SN6_1_F_ovaries_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/SN6_1_F_ovaries_R2_001.fastq.gz
+    F_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/SN6_1_F_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/SN6_1_F_soma_R2_001.fastq.gz
+    M_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/SN6_1_M_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/SN6_1_M_soma_R2_001.fastq.gz
+    M_testes:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/SN6_1_M_testes_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/SN6_1_M_testes_R2_001.fastq.gz 
+
+  Tai_6:
+    Ovaries:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Tai6_F_ovaries_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Tai6_F_ovaries_R2_001.fastq.gz
+    F_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Tai6_F_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Tai6_F_soma_R2_001.fastq.gz
+    M_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Tai6_M_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Tai6_M_soma_R2_001.fastq.gz
+    M_testes:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Tai6_M_testes_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Tai6_M_testes_R2_001.fastq.gz 
+
+  thera_6:
+    Ovaries:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Thera6_F_ovaries_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Thera6_F_ovaries_R2_001.fastq.gz
+    F_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Thera6_F_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Thera6_F_soma_R2_001.fastq.gz
+    M_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Thera6_M_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Thera6_M_soma_R2_001.fastq.gz
+    M_testes:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Thera6_M_testes_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Thera6_M_testes_R2_001.fastq.gz 
+
+  Xute_1:
+    Ovaries:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Xute1_F_ovaries_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Xute1_F_ovaries_R2_001.fastq.gz
+    F_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Xute1_F_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Xute1_F_soma_R2_001.fastq.gz
+    M_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Xute1_M_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Xute1_M_soma_R2_001.fastq.gz
+    M_testes:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Xute1_M_testes_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchI/Xute1_M_testes_R2_001.fastq.gz 
+
+  Green_1_7__1:
+    Ovaries:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/1_7_1_F_ov_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/1_7_1_F_ov_R2_001.fastq.gz
+    F_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/1_7_1_F_som_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/1_7_1_F_som_R2_001.fastq.gz
+    M_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/1_7_1_M_som_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/1_7_1_M_som_R2_001.fastq.gz
+    M_testes:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/1_7_1_M_teste_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/1_7_1_M_teste_R2_001.fastq.gz
+
+  Green_2_8:
+    Ovaries:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/2_8_F_ovary_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/2_8_F_ovary_R2_001.fastq.gz
+    F_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/2_8_F_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/2_8_F_soma_R2_001.fastq.gz
+    M_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/2_8_M_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/2_8_M_soma_R2_001.fastq.gz
+    M_testes:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/2_8_M_testes_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/2_8_M_testes_R2_001.fastq.gz
+
+  Green_7_14_6:
+    Ovaries:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/7_14_6_F_ovary_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/7_14_6_F_ovary_R2_001.fastq.gz
+    F_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/7_14_6_F_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/7_14_6_F_soma_R2_001.fastq.gz
+    M_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/7_14_6_M_som_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/7_14_6_M_som_R2_001.fastq.gz
+    M_testes:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/7_14_6_M_teste_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/7_14_6_M_teste_R2_001.fastq.gz
+
+  OranCascade19_16:
+    Ovaries:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Cascade_19_16_F_ovar_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Cascade_19_16_F_ovar_R2_001.fastq.gz
+    F_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Cascade_19_16_F_som_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Cascade_19_16_F_som_R2_001.fastq.gz
+
+  OranCascade24:
+    Ovaries:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Cascade24_F_ovar_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Cascade24_F_ovar_R2_001.fastq.gz
+    F_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Cascade24_F_som_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Cascade24_F_som_R2_001.fastq.gz
+    M_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Cascade24_M_som_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Cascade24_M_som_R2_001.fastq.gz
+    M_testes:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Casecade24_M_teste_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Casecade24_M_teste_R2_001.fastq.gz
+
+  Line_1:
+    Ovaries:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Line1_F_ovar_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Line1_F_ovar_R2_001.fastq.gz
+    F_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Line1_F_som_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Line1_F_som_R2_001.fastq.gz
+    M_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Line1_M_som_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Line1_M_som_R2_001.fastq.gz
+    M_testes:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Line1_M_teste_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Line1_M_teste_R2_001.fastq.gz
+
+  Green_SA3:
+    Ovaries:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/SA3_F_ovary_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/SA3_F_ovary_R2_001.fastq.gz
+    F_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/SA3_F_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/SA3_F_soma_R2_001.fastq.gz
+    M_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/SA3_M_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/SA3_M_soma_R2_001.fastq.gz
+    M_testes:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/SA3_M_testes_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/SA3_M_testes_R2_001.fastq.gz
+
+  Syn_2005:
+    Ovaries:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/STN_2005_F_ovary_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/STN_2005_F_ovary_R2_001.fastq.gz
+    F_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/STN_2005_F_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/STN_2005_F_soma_R2_001.fastq.gz
+    M_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/STN_2005_M_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/STN_2005_M_soma_R2_001.fastq.gz
+    M_testes:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/STN_2005_M_testes_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/STN_2005_M_testes_R2_001.fastq.gz
+      
+  OranSJ28:
+    M_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/SJ28_M_som_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/SJ28_M_som_R2_001.fastq.gz
+    M_testes:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/SJ28_M_teste_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/SJ28_M_teste_R2_001.fastq.gz
+
+  thera_2005:
+    Ovaries:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Thera_2005_F_ovary_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Thera_2005_F_ovary_R2_001.fastq.gz
+    F_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Thera_2005_F_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Thera_2005_F_soma_R2_001.fastq.gz
+    M_Soma:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Thera_2005_M_soma_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Thera_2005_M_soma_R2_001.fastq.gz
+    M_testes:
+      1: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Thera_2005_M_testes_R1_001.fastq.gz
+      2: /projects/rogers_research/fnb/tmiorin/DsantRNAproject/BatchII/Thera_2005_M_testes_R2_001.fastq.gz  
+
+ 
+
+
+
+
+#sample/strain names with those from population 1 listed before those from population 2
+#each strain has an array of the corresponding names of fastq files from above
+#(to account for the possibility of multiple fastqs per strain)
+strains:
+#  Ansc: [GT53w]
+  BE1: [04_S22]
+  BE13: [07_S25]
+  #BE18: [08_S26]
+  BE24: [19_S37]
+  BE5: [14_S32]
+  BE7: [01_S19]
+  BE8: [16_S34]
+  MTS14: [03_S21]
+  MTS18: [02_S20]
+  MTS22: [17_S35]
+  MTS24: [05_S23]
+  MTS25: [18_S36]
+  MTS26: [12_S30]
+  SOU10: [15_S33]
+  SOU15: [13_S31]
+  SOU6: [06_S24]
+  SOU7: [09_S27]
+  SOU8: [10_S28]
+  SOU9: [11_S29]
+  Bata6: [grey_Bata6_S20_L005]
+  Cameroon_115: [grey_cameroon_115_S9_L005]
+  #CY01A: [CY01A_02_19_2010_54, CY01A_03_01_2010_75, CY01A_04_06_2011_75]
+  CY02B5: [CY02B5_02_05_2010_48, CY02B5_02_19_2010_54, CY02B5_03_01_2010_75]
+  CY04B: [CY04B_02_05_2010_48, CY04B_02_19_2010_54, CY04B_03_01_2010_75, CY04B_04_06_2011_75]
+  #CY08A: [CY08A_02_05_2010_48, CY08A_03_01_2010_75, CY08A_03_15_2010_54]
+  #CY13A: [CY13A_02_05_2010_48, CY13A_03_01_2010_75, CY13A_03_15_2010_54]
+  #CY17C: [CY17C_02_05_2010_48, CY17C_03_01_2010_75, CY17C_03_15_2010_54]
+  #CY20A: [CY20A_04_06_2011_75, CY20A_09_07_2010_75, CY20A2_09_12_2010_75]
+  #CY21B3: [CY21B3_02_05_2010_48, CY21B3_03_01_2010_75, CY21B3_03_15_2010_54]
+  CY22B: [CY22B_02_19_2010_54, CY22B_03_01_2010_75, CY22B_03_15_2010_54]
+  #CY28: [CY28A4_06_21_2010_54, CY28A4_09_07_2010_75, CY28A4_09_12_2010_75]
+  #NY141: [NY141_04_06_2011_75, NY141_06_21_2010_54, NY141_09_12_2010_75]
+  NY42: [NY42_06_21_2010_54, NY42_09_07_2010_75, NY42_09_12_2010_75]
+  NY48: [NY48_05_13_2010_54, NY48_06_13_2010_72, NY48_07_11_2010_75]
+  NY56: [NY56_05_13_2010_54, NY56_06_13_2010_72, NY56_07_11_2010_75]
+  NY62: [NY62_06_01_2010_54, NY62_06_13_2010_72, NY62_07_11_2010_75]
+  #NY65: [NY65_06_01_2010_54, NY65_07_11_2010_75]
+  NY66: [NY66_05_13_2010_54, NY66_07_11_2010_75] #NY66-2_04_06_2011_75
+  NY73: [NY73_06_01_2010_54, NY73_06_13_2010_72, NY73_07_11_2010_75]
+  NY81: [NY81_05_13_2010_54, NY81_07_11_2010_75] #NY81_04_06_2011_75
+  NY85: [NY85_06_21_2010_54, NY85_09_07_2010_75, NY85_09_12_2010_75]
+  Tai_12: [Grey_Tai_12_S64_L007]
+  Tai_18: [grey_tai_18_S22_L005]
+  Tai_6: [grey_tai_6_S1_L005]
+  Oran11_4_1: [oran_11_4_1_S13_L005]
+  Oran1150_85: [oran_11150_85_S82_L008]
+  Oran11_5: [oran_11_5_S7_L005]
+  Oran13_2_1: [oran_13_2_1_S21_L005]
+  Oran13_3_1: [oran_13_3_1_S89_L008]
+  Oran13_6: [oran_13_6_S8_L005]
+  Oran13_7: [oran_13_7_S84_L008]
+  Oran13_8: [oran_13_8_S15_L005]
+  Oran14_3_1: [oran_14_3_1_S90_L008]
+  Oran14_3: [oran14_3_S19_L005]
+  Oran14_5: [oran_14_5_S93_L008]
+  Oran14_6: [oran_14_6_S12_L005]
+  Oran17_1: [oran_17_1_S81_L008]
+  Oran17_2_1: [oran_17_2_1_S10_L005]
+  Oran17_26_1: [oran_17_26_1_S72_L008]
+  Oran17_26: [oran_17_26_S85_L008]
+  Oran17_7: [oran_17_7_S80_L008]
+  Oran19_6_1: [oran_19_6_1_S6_L005]
+  Oran9_7_16: [oran_9_7_16_S76_L008]
+  OranCas33: [oran_cas_33_S87_L008]
+  OranCascade19_16: [oran_cascade_19_16_S91_L008]
+  OranCascade21: [oran_cascade_21_S88_L008]
+  OranCascade24: [oran_cascade_24_S77_L008]
+  OranCascade411: [cascade_4_1_1_S83_L008]
+  OranLP4_6_2: [oran_LP_4_6_2_S95_L008]
+  OranLP72_4: [oranLP72_4_S11_L005]
+  OranMarket7_6: [oran_market_7_6_S75_L008]
+  OranSJ1: [oran_SJ1_S79_L008]
+  OranSJ28: [oran_sj_28_S73_L008]
+  OranSJ3_4_6: [oran_sj_3_4_6_S86_L008]
+  OranSJ7: [oran_SJ7_S78_L008]
+  OranSJ9: [oran_SJ9_S92_L008]
+  OranSN6_1: [oran_sn6_1_S74_L008]
+  OranST1_1_6: [oran_ST1_1_6_S14_L005]
+  OranST672_1_4: [oran_ST672_1_4_S23_L005]
+  OBO_1240_1: [080_1240_1_S55_L007] 
+  #BS_17: [8517_S53_L007]
+  BS17: [8517_S53_L007]
+  A_1200: [A_1200_4_S31_L006]
+  Amelia_2015_18: [Amelia_2015_18_S46_L006]
+  Amelia_2015_1: [Amelia_2015_1_S52_L007]
+  B1300_13: [B1300_-13_S33_L006]
+  B1300_5: [B1300_5_S29_L006]
+  BS_14: [BS14_S43_L006]
+  BS_14_6: [BS_14_6_S30_L006]
+  C1350_16: [C_1350_16_S32_L006]
+  C1350_18: [C1350_18_S44_L006]
+  CA60_1482_1: [CA60_1482_1_S36_L006]
+  CA60_1482_2: [CA60_1482_2_S50_L007]
+  CAR_1366_9: [CAR_1366_9_S45_L006]
+  CAR_1490_16: [CAR_1490_16_S34_L006]
+  CAR_1490_3: [CAR_1490_3_S39_L006]
+  CAR_1490_5: [CAR_1490_5_S61_L007]
+  CAR_1490_6: [car_1490_6_S5_L005]
+  CAR_1496_17: [CAR_1496_17_S51_L007]
+  CAR_1566_94: [CAR_1566_94_S59_L007]
+  CAR_1600: [Car_1600_S38_L006]
+  CARV_2015_2: [CARV_2015_2_S42_L006]
+  COST_1250_5: [COST_1250_5_S47_L006]
+  COST_1270_6: [Cost_1270_6_S27_L006]
+  #Field_3_1: [Field_3_1_S37_L006]
+  Field_3A: [Field_3A_S24_L006]
+  Field_3: [Field_3_S40_L006]
+  Line_1: [Line_1_S35_L006]
+  Line_42: [Line_42_S28_L006]
+  OBAT_1200_3: [OBAT_1200_3_S63_L007]
+  obat_1250_31: [obat_1250_31_S57_L007]
+  OBAT_1400_2: [OBAT_1400_2_S41_L006]
+  OBO_1250_6: [OBO_1250_6_S4_L005]
+  quijai_650_39: [quijai_650_39_S56_L007]
+  STO17: [STO17_S3_L005]
+  STO_17: [STO_17_S60_L007]
+  STO_4: [STO_4_S48_L007]
+  STO7: [STO7_S49_L007]
+  Syn_2005: [Syn_2005_S25_L006]
+  thera_2005: [thera_2005_S58_L007]
+  thera_3: [thera_3_S54_L007]
+  thera_4: [thera_4_S62_L007]
+  thera_6: [Thera_6_S26_L006]
+  Xute_1: [Xute_1_S2_L005]
+  # green 
+  Green_Bosa_32_6: [Bosa_32_6_S17]
+  Green_5_19_6: [5_19_6_S18]
+  Green_3_4_1: [3_4_1_S16]
+  Green_SA3: [SA3_S68]
+  Green_7_14_6: [7_14_6_S69]
+  Green_1_7__1: [1_7__1_S67]
+  Green_2_8: [2_8_S66]
+  Green_3_8: [3_8_S70]
+  Green_4_23_1: [4_23_1_S71]
+  Green_5_3: [5_3_S65]
+
+
+
+
+#names of chromosomes in the order you want them displayed on the x-axis of the popgen plots
+chroms: ['NC_052526.2', 'NC_052527.2', 'NC_052528.2', 'NC_052529.2', 'NC_052530.2', 'NC_052531.2', 'NW_025048783.1', 'NW_025048784.1', 'NW_025048785.1', 'NW_025048786.1', 'NW_025048787.1', 'NW_025048788.1', 'NW_025048789.1', 'NW_025048790.1', 'NW_025048791.1', 'NW_025048792.1', 'NW_025048793.1', 'NW_025048794.1', 'NW_025048795.1', 'NW_025048796.1', 'NW_025048797.1', 'NW_025048798.1', 'NW_025048799.1', 'NW_025048800.1', 'NW_025048801.1', 'NW_025048802.1', 'NW_025048803.1', 'NW_025048804.1', 'NW_025048805.1', 'NW_025048806.1', 'NW_025048807.1', 'NW_025048808.1', 'NW_025048809.1', 'NW_025048810.1', 'NW_025048811.1', 'NW_025048812.1', 'NW_025048813.1', 'NW_025048814.1', 'NW_025048815.1', 'NW_025048816.1', 'NW_025048817.1', 'NW_025048818.1', 'NW_025048819.1', 'NW_025048820.1', 'NW_025048821.1', 'NW_025048822.1', 'NW_025048823.1', 'NW_025048824.1', 'NW_025048825.1', 'NW_025048826.1', 'NW_025048827.1', 'NW_025048828.1', 'NW_025048829.1', 'NC_001322.1']
+
+
+#for each reference, the length of each chromosome
+#note that for each reference the set of chromosomes must match chroms above,
+#though the order is specific to the order of the chromosomes in that particular reference fasta file
+lengths:
+  Dyak_Tai18E2:
+    # "X": 24674111
+    # "2L": 31052823
+    # "2R": 23815364
+    # "3L": 25180726
+    # "3R": 30730878
+    # "4": 1429810
+    "NC_052526.2": 24674056
+    "NC_052527.2": 31052931
+    "NC_052528.2": 23815334
+    "NC_052529.2": 25180761
+    "NC_052530.2": 30730773
+    "NC_052531.2": 1429802
+    "NW_025048783.1": 535877
+    "NW_025048784.1": 389315
+    "NW_025048785.1": 189197
+    "NW_025048786.1": 151304
+    "NW_025048787.1": 82936
+    "NW_025048788.1": 66476
+    "NW_025048789.1": 137306
+    "NW_025048790.1": 19552
+    "NW_025048791.1": 46392
+    "NW_025048792.1": 83576
+    "NW_025048793.1": 45736
+    "NW_025048794.1": 42033
+    "NW_025048795.1": 40338
+    "NW_025048796.1": 40463
+    "NW_025048797.1": 75918
+    "NW_025048798.1": 37762
+    "NW_025048799.1": 27418
+    "NW_025048800.1": 52694
+    "NW_025048801.1": 1888708
+    "NW_025048802.1": 41295
+    "NW_025048803.1": 22349
+    "NW_025048804.1": 18112
+    "NW_025048805.1": 28823
+    "NW_025048806.1": 16581
+    "NW_025048807.1": 15923
+    "NW_025048808.1": 13065
+    "NW_025048809.1": 9998
+    "NW_025048810.1": 9372
+    "NW_025048811.1": 9019
+    "NW_025048812.1": 5686
+    "NW_025048813.1": 11367
+    "NW_025048814.1": 14664
+    "NW_025048815.1": 23661
+    "NW_025048816.1": 1442517
+    "NW_025048817.1": 1889104
+    "NW_025048818.1": 264526
+    "NW_025048819.1": 72436
+    "NW_025048820.1": 44886
+    "NW_025048821.1": 538108
+    "NW_025048822.1": 41958
+    "NW_025048823.1": 36144
+    "NW_025048824.1": 1266801
+    "NW_025048825.1": 270105
+    "NW_025048826.1": 41654
+    "NW_025048827.1": 51595
+    "NW_025048828.1": 802955
+    "NW_025048829.1": 43736
+    "NC_001322.1": 16019
+  Dyak-all-chrom-wb-r105:
+    "2L": 22324452
+    "2R": 21139217
+    "3L": 24197627
+    "3R": 28832112
+    "X": 21770863
+  Dyak_NY73PB:
+    "X": 23732139
+    "2L": 24263191
+    "2R": 23843395
+    "3L": 26819071
+    "3R": 29879537
+    "4": 1398773
+  # Dyak_Tai18E2: 
+  #   "X": 24674111
+  #   "2L": 31052823
+  #   "2R": 23815364
+  #   "3L": 25180726
+  #   "3R": 30730878
+  #   "4": 1429810
+  #   "Segkk28_quiver_pilon_scaf": 27412
+  #   "Segkk31_quiver_pilon_scaf": 22337
+  #   "Segkk8_quiver_pilon_scaf": 802935
+  #   "Segkk10_quiver_pilon_scaf": 535835
+  #   "Segkk13_quiver_pilon_scaf": 189191
+  #   "Segkk59_quiver_pilon_scaf": 36143
+  #   "Segkk19_quiver_pilon_scaf": 19598
+  #   "Segkk50_quiver_pilon_scaf": 1889137
+  #   "Segkk57_quiver_pilon_scaf": 538115
+  #   "Segkk25_quiver_pilon_scaf": 40450
+  #   "Segkk20_quiver_pilon_scaf": 46380
+  #   "Segkk23_quiver_pilon_scaf": 42022
+  #   "Segkk4_quiver_pilon_scaf": 1442533
+  #   "Segkk63_quiver_pilon_scaf": 270115
+  #   "Segkk32_quiver_pilon_scaf": 18111
+  #   "Segkk33_quiver_pilon_scaf": 28790
+  #   "Segkk21_quiver_pilon_scaf": 83577
+  #   "Segkk34_quiver_pilon_scaf": 16576
+  #   "Segkk22_quiver_pilon_scaf": 45724
+  #   "Dyak_Tai18E2_draft_mtDNA_rotated_quiver_pilon_scaf": 16021
+  #   "Segkk40_quiver_pilon_scaf": 5685
+  #   "Segkk37_quiver_pilon_scaf": 9998
+  #   "Segkk64_quiver_pilon_scaf": 41654
+  #   "Segkk38_quiver_pilon_scaf": 9371
+  #   "Segkk11_quiver_pilon_scaf": 389324
+  #   "Segkk53_quiver_pilon_scaf": 44893
+  #   "Segkk24_quiver_pilon_scaf": 40364
+  #   "Segkk2_quiver_pilon_scaf": 1888698
+  #   "Segkk39_quiver_pilon_scaf": 8993
+  #   "Segkk16_quiver_pilon_scaf": 66500
+  #   "Segkk15_quiver_pilon_scaf": 82935
+  #   "Segkk17_quiver_pilon_scaf": 137315
+  #   "Segkk42_quiver_pilon_scaf": 11367
+  #   "Segkk58_quiver_pilon_scaf": 41957
+  #   "Segkk35_quiver_pilon_scaf": 15923
+  #   "Segkk44_quiver_pilon_scaf": 23654
+  #   "Segkk65_quiver_pilon_scaf": 51590
+  #   "Segkk29_quiver_pilon_scaf": 52685
+  #   "Segkk18_quiver_pilon_scaf": 55587
+  #   "Segkk51_quiver_pilon_scaf": 264514
+  #   "Segkk5_quiver_pilon_scaf": 1266834
+  #   "Segkk26_quiver_pilon_scaf": 75914
+  #   "Segkk27_quiver_pilon_scaf": 37755
+  #   "Segkk30_quiver_pilon_scaf": 41291
+  #   "Segkk14_quiver_pilon_scaf": 151341
+  #   "Segkk43_quiver_pilon_scaf": 14666
+  #   "Segkk9_quiver_pilon_scaf": 43715
+  #   "Segkk36_quiver_pilon_scaf": 13070
+  #   "Segkk52_quiver_pilon_scaf": 72433
+
+populations_names:
+  Control: Mainland D.yakuba
+  Mayotte: Mayotte D.yakuba
+  IslYak: Stome D.yakuba
+  Santomea: D.santomea
+  Green: Hybrid D.santomea-D.yakuba
+
+#names of the two populations with the corresponding array of strain names
+populations:
+  Control: [Bata6, Cameroon_115, CY01A, CY02B5, CY04B, CY08A, CY13A, CY17C, CY20A, CY21B3, CY22B, CY28, NY141, NY42, NY48, NY56, NY62, NY66, NY73, NY81, NY85, Tai_12, Tai_18, Tai_6]
+  Mayotte: [BE1, BE13, BE24, BE5, BE7, BE8, MTS14, MTS18, MTS22, MTS24, MTS25, MTS26, SOU10, SOU15, SOU6, SOU7, SOU8, SOU9]
+  # #Ansc: [Ansc]
+  IslYak: [Oran11_4_1, Oran1150_85, Oran11_5, Oran13_2_1, Oran13_3_1, Oran13_6, Oran13_7, Oran13_8, Oran14_3_1, Oran14_3, Oran14_5, Oran14_6, Oran17_1, Oran17_2_1, Oran17_26_1, Oran17_26, Oran17_7, Oran19_6_1, Oran9_7_16, OranCas33, OranCascade19_16, OranCascade21, OranCascade24, OranCascade411, OranLP4_6_2, OranLP72_4, OranMarket7_6, OranSJ1, OranSJ28, OranSJ3_4_6, OranSJ7, OranSJ9, OranSN6_1, OranST1_1_6, OranST672_1_4]
+  Santomea: [A_1200, Amelia_2015_18, Amelia_2015_1, B1300_13, B1300_5, BS_14_6, BS_14, BS_17, C1350_16, C1350_18, CA60_1482_1, CA60_1482_2, CAR_1366_9, CAR_1490_16, CAR_1490_3, CAR_1490_5, CAR_1490_6, CAR_1496_17, CAR_1566_94, CAR_1600, CARV_2015_2, COST_1250_5, COST_1270_6, Field_3A, Field_3, Line_1, Line_42, OBAT_1200_3, obat_1250_31, OBAT_1400_2, OBO_1240_1, OBO_1250_6, quijai_650_39, STO7, STO_17, STO_4, STO17, Syn_2005, thera_2005, thera_3, thera_4, thera_6, Xute_1]
+  Green: [Bosa_32_6, 5_19_6, 3_4_1, SA3, 7_14_6, 1_7__1, 2_8, 3_8, 4_23_1, 5_3]
+
+annotation:
+  genecoords:
+    Dyak-all-chrom-wb-r105: /projects/rogers_research/fnb/Rhyker/RefGenomes/GeneCoords.r1.05.txt
+    #Dyak_Tai18E2: /projects/rogers_research/fnb/Brandon/RemoteEdit/ComplexVarAlign/MayotteHMM/workflow/sortedgtf.gtf
+    Dyak_Tai18E2: /projects/rogers_research/fnb/Brandon/RemoteEdit/ComplexVarAlign/Ch3TandemDups/data/geneExpression/GCF_016746365.2_Prin_Dyak_Tai18E2_2.1_genomic.gtf #/projects/rogers_research/fnb/RefGenomes/GCF_016746365.2_Prin_Dyak_Tai18E2_2.1_genomic.gtf
+  gff3:
+    Dyak_NY73PB: /projects/rogers_research/fnb/Rhyker/RefGenomes/Dyak_NY73PB.gff3.gz
+    Dyak_Tai18E2: /projects/rogers_research/fnb/Rhyker/RefGenomes/Dyak_Tai18E2.gff3.gz
+  gff:
+    Dyak_Tai18E2: /projects/rogers_research/fnb/Brandon/RemoteEdit/ComplexVarAlign/Ch3TandemDups/data/Tai18E2_2.1.geneCoords.genes.gff
+
+CDS:
+  related:
+    Dmel: /projects/rogers_research/fnb/RefGenomes/dmel-all-CDS-r6.22.fasta
+  ref:
+    Dyak-all-chrom-wb-r105: /projects/rogers_research/fnb/RefGenomes/dyak-all-CDS-r1.05.fasta
+    Dyak_NY73PB: /projects/rogers_research/fnb/Rhyker/RefGenomes/Dyak_NY73PB.transcripts.fasta
+    Dyak_Tai18E2: /projects/rogers_research/fnb/Rhyker/RefGenomes/Dyak_Tai18E2.transcripts.fasta
+
+

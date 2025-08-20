@@ -1,0 +1,21 @@
+from itertools import combinations
+from itertools import product
+
+
+configfile: "../config/config.yaml"
+
+
+include: "rules/0_common.smk"
+include: "rules/1_fastaProcess.smk"
+
+rule all:
+     input: 
+          expand('results/1_fastaProcess/EarlGrey/',
+                    strain = strains
+          )
+
+               
+          # expand("results/4_RNA/Star/Depth/{sample}_{tissue}.depth",
+          #       tissue=[t for _, t in rna_pairs],
+          #       populations = non_control_pops
+          #  )

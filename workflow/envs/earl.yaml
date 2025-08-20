@@ -1,0 +1,8 @@
+name: earlgrey-env
+
+channels:
+  - bioconda
+  - conda-forge
+  - defaults
+dependencies:
+  - earlgrey=6.3.2
