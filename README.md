@@ -1,5 +1,10 @@
-Small sample of one of my workflows! They are organized in the standard snakemake distribution format:
+Small sample of one of my workflows! 
 
+Each of the rules files exists to organize steps in the pipeline (align to reference, run an HMM on each sample, etc).
+
+They are organized in the standard snakemake distribution format:
+
+```
 ├── .gitignore
 ├── workflow
 │   ├── rules
@@ -23,3 +28,5 @@ Small sample of one of my workflows! They are organized in the standard snakemak
 │   └── some-sheet.tsv
 ├── results
 └── resources
+```
+'''
